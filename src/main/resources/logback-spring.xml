@@ -1,0 +1,54 @@
+<configuration debug="true">
+    <!-- Custom Appender -->
+    <appender name="worklog" class="com.customLogging.logger.WorklogAppender"/>
+
+    <!--console appender for general purpose-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!--File appender for info log-->
+
+    <appender name="infoLogFile" class="ch.qos.logback.core.FileAppender">
+        <file>logs/demo-info.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+
+    <!--File appender for Error log-->
+
+    <appender name="errorFileLog" class="ch.qos.logback.core.FileAppender">
+        <file>logs/demo-error.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+    <!-- Logger configuration for worklog -->
+    <logger name="worklog" level="INFO" additivity="false">
+        <appender-ref ref="worklog"/>
+    </logger>
+
+    <!-- Default root logger -->
+    <root level="INFO">
+        <appender-ref ref="console"/>
+    </root>
+
+    <logger name="com.customLogging" level="INFO" additivity="false">
+        <appender-ref ref="infoLogFile"/>
+    </logger>
+    <logger name="com.customLogging" level="Error" additivity="false">
+        <appender-ref ref="errorFileLog"/>
+    </logger>
+</configuration>
