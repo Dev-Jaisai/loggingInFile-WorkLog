@@ -13,6 +13,6 @@ public class Project1Controller {
         log.info("Info Log saved in Info File of Packaged");
 
         log.error("Error log saved in Error file of packaged");
-        return "Tested Succesfully";
+        return "Tested Succesfully and Running Successfully";
     }
 }
