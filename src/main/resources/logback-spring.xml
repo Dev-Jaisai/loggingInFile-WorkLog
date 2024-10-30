@@ -1,54 +1,47 @@
 <configuration debug="true">
-    <!-- Custom Appender -->
-    <appender name="worklog" class="com.customLogging.logger.WorklogAppender"/>
 
-    <!--console appender for general purpose-->
+    <!-- Console appender for general purpose -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>
-                %d{yyyy-MM-dd HH:mm:ss} - %msg%n
-            </pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <!--File appender for info log-->
-
-    <appender name="infoLogFile" class="ch.qos.logback.core.FileAppender">
-        <file>logs/demo-info.log</file>
+    <!-- File appender for INFO logs -->
+    <appender name="InfoFileLog" class="ch.qos.logback.core.FileAppender">
+        <file>logs/demo-Infoproject1Packageclassed.log</file>
         <append>true</append>
         <encoder>
-            <pattern>
-                %d{yyyy-MM-dd HH:mm:ss} - %msg%n
-            </pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
         </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
     </appender>
 
-
-    <!--File appender for Error log-->
-
-    <appender name="errorFileLog" class="ch.qos.logback.core.FileAppender">
-        <file>logs/demo-error.log</file>
+    <!-- File appender for ERROR logs -->
+    <appender name="ErrorFileLog" class="ch.qos.logback.core.FileAppender">
+        <file>logs/demo-Errorproject1Packageclassed.log</file>
         <append>true</append>
         <encoder>
-            <pattern>
-                %d{yyyy-MM-dd HH:mm:ss} - %msg%n
-            </pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
         </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
     </appender>
-    <!-- Logger configuration for worklog -->
-    <logger name="worklog" level="INFO" additivity="false">
-        <appender-ref ref="worklog"/>
+
+    <!-- Logger for com.customLogging.project1 with both INFO and ERROR levels -->
+    <logger name="com.customLogging.project1" level="DEBUG" additivity="false">
+        <appender-ref ref="InfoFileLog"/>
+        <appender-ref ref="ErrorFileLog"/>
     </logger>
 
-    <!-- Default root logger -->
+    <!-- Root logger -->
     <root level="INFO">
         <appender-ref ref="console"/>
     </root>
 
-    <logger name="com.customLogging" level="INFO" additivity="false">
-        <appender-ref ref="infoLogFile"/>
-    </logger>
-    <logger name="com.customLogging" level="Error" additivity="false">
-        <appender-ref ref="errorFileLog"/>
-    </logger>
 </configuration>
